@@ -76,9 +76,13 @@ namespace CoreMVCCodeFirst_1.Controllers
 
 
         [HttpPost]
-        public IActionResult UpdateCategory()
+        public IActionResult UpdateCategory(CategoryVM category)
         {
-            return View();
+            Category original = _db.Categories.Find(category.ID);
+            original.CategoryName = category.CategoryName;
+            original.Description = category.Description;
+            _db.SaveChanges();
+            return RedirectToAction("GetCategories");
         }
       
 
