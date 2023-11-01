@@ -82,10 +82,16 @@ namespace CoreMVCCodeFirst_1.Controllers
             original.CategoryName = category.CategoryName;
             original.Description = category.Description;
             _db.SaveChanges();
-            ViewBag.Message = "Guncelleme Basarili";
+            TempData["message"] = "Guncelleme Basarili";
             return RedirectToAction("GetCategories");
         }
-      
+
+        public IActionResult DeleteCategory(int id) 
+        {
+            _db.Categories.Remove(_db.Categories.Find(id));
+            _db.SaveChanges();
+            return RedirectToAction("GetCategories");
+        }
 
 
 
